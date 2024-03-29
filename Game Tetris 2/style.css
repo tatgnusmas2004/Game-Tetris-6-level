@@ -1,0 +1,33 @@
+* {
+  font-family: "Press Start 2P", cursive;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 320px 200px;
+  justify-content: center;
+  margin-top: 100px;
+}
+.container .side-bar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.container .side-bar .play-btn {
+  background-color: greenyellow;
+  font-size: 16px;
+  padding: 15px 30px;
+}
+.container .side-bar .reset-btn {
+  background-color: yellow;
+  font-size: 16px;
+  padding: 15px 30px;
+}
+.container .side-bar .next-btn {
+  background-color: red;
+  font-size: 16px;
+  padding: 15px 30px;
+}
+.container #board {
+  border: 2px solid #000;
+}/*# sourceMappingURL=style.css.map */
