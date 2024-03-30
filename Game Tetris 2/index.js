@@ -221,7 +221,7 @@ class Brick {
     }
 
     moveLeft() {
-        if (!this.checkCollide(this.colPos - 1)) {
+        if (!this.checkCollide(this.rowPos, this.colPos - 1, this.layout[this.activeIndex])) {
             this.clear();
             this.colPos--;
             this.draw();
@@ -229,7 +229,7 @@ class Brick {
     }
 
     moveRight() {
-        if (!this.checkCollide(this.colPos + 1)) {
+        if (!this.checkCollide(this.rowPos, this.colPos + 1, this.layout[this.activeIndex])) {
             this.clear();
             this.colPos++;
             this.draw();
@@ -237,30 +237,64 @@ class Brick {
     }
 
     moveDown() {
-        this.clear();
-        this.rowPos += 1;
-        this.draw();
-    }
-
-    rotate() {
-        this.clear();
-        this.activeIndex = (this.activeIndex + 1) % 4;
-        this.draw();
-    }
-
-    checkCollide(nextMove) {
-        // xét đường biên trái
-        if (nextMove < 0) {
-            return true;
-        // xét đường biên phải
-        } else if (nextMove + this.layout[this.activeIndex][0].length > COLS) {
-            return true;
+        if (!this.checkCollide(this.rowPos + 1, this.colPos, this.layout[this.activeIndex])) {
+            this.clear();
+            this.rowPos++;
+            this.draw();
+        } else {
+            this.mergeBoard();
+            createRandomBrick();
         }
     }
 
-    randomBrick() {
-        return Math.floor(Math.random() * BRICK_LAYOUT.length);
+    rotate() {
+        if (!this.checkCollide(this.rowPos, this.colPos, this.layout[(this.activeIndex + 1) % 4])) {
+            this.clear();
+            this.activeIndex = (this.activeIndex + 1) % 4;
+            this.draw();
+        }
     }
+
+    // hàm kiếm tra sự va chạm
+    checkCollide(nextRow, nextCol, nextLayout) {
+        // xét đường biên trái
+        if (nextCol < 0) {
+            return true;
+            // xét đường biên phải
+        } else if ((nextCol + nextLayout[0].length > COLS)
+            // Xét đường biên dưới
+            || (nextRow + nextLayout.length > ROWS)) {
+            return true;
+        }
+
+        // Kiểm tra sự va chạm giữa các khối với nhau
+        // Nếu ô brick gặp ô trên board mà ko phải màu trắng thì return true
+        for (let row = 0; row < nextLayout.length; row++) {
+            for (let col = 0; col < nextLayout[0].length; col++) {
+                if (nextLayout[row][col] !== WHITE_COLOR_ID) {
+                    if (board.grid[row + nextRow][col + nextCol] !== WHITE_COLOR_ID) {
+                        return true;
+                    }
+                }
+            }
+        }
+    }
+
+    mergeBoard() {
+        for (let row = 0; row < this.layout[this.activeIndex].length; row++) {
+            for (let col = 0; col < this.layout[this.activeIndex][0].length; col++) {
+                if (this.layout[this.activeIndex][row][col] !== WHITE_COLOR_ID) {
+                    board.grid[row + this.rowPos][col + this.colPos] = this.id;
+                }
+            }
+        }
+        board.drawBoard();
+    }
+}
+
+// Tạo ra 1 khối ngẫu nhiên
+function createRandomBrick() {
+    brick = new Brick(Math.floor(Math.random() * BRICK_LAYOUT.length));
 }
 
 document.addEventListener("keydown", (event) => {
@@ -277,13 +311,11 @@ document.addEventListener("keydown", (event) => {
     }
 });
 
-brick = new Brick(0);
-brick = new Brick(brick.randomBrick());
-console.log(brick.layout[0][0].length);
 
 function play() {
+    createRandomBrick();
     brick.draw();
-    // setInterval(() => {
-    //     brick.moveDown();
-    // }, 1000);
+    setInterval(() => {
+        brick.moveDown();
+    }, 1000);
 }
