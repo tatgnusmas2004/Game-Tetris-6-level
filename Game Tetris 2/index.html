@@ -1,5 +1,5 @@
-<!-- Thông tin cá nhân -->
-<!-- Tên: Trần Anh Trí
+<!--Thông tin cá nhân 
+    Tên: Trần Anh Trí
     Lớp: DH21DTD
     MSSV: 21130577 -->
 <!DOCTYPE html>
@@ -24,15 +24,28 @@
         <div class="side-bar">
             <div>
                 <h1>TETRIS</h1>
-                <p>Score: <span id="score">0</span></p>
+                <p>Score:
+                    <input id="score" type="text" value="0" readonly>
+                </p>
+                Level:<select name="level" id="level">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                </select>
+                <p id="max-rotate">
+                    Rotate:
+                    <input type="text" value="10" readonly>
+                </p>
             </div>
-            <button class="play-btn" onclick="play()">Play</button>
+            <button id="play" class="play-btn">Play</button>
             <button class="reset-btn">Reset</button>
-            <button class="next-btn">Next</button>
         </div>
     </div>
 
     <script src="index.js"></script>
-    </body>
+</body>
 
 </html>
