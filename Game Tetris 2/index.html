@@ -1,7 +1,8 @@
 <!--Thông tin cá nhân 
     Tên: Trần Anh Trí
     Lớp: DH21DTD
-    MSSV: 21130577 -->
+    MSSV: 21130577
+    SDT: 0369744946 -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,7 +28,8 @@
                 <p>Score:
                     <input id="score" type="text" value="0" readonly>
                 </p>
-                Level:<select name="level" id="level">
+                Level:
+                <select name="level" id="level">
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -37,11 +39,51 @@
                 </select>
                 <p id="max-rotate">
                     Rotate:
-                    <input type="text" value="10" readonly>
+                    <input type="number" value="5" readonly>
+                </p>
+                <p id="warning">
+                    Warning:
+                    <input type="number" value="10" readonly>
                 </p>
             </div>
-            <button id="play" class="play-btn">Play</button>
-            <button class="reset-btn">Reset</button>
+            <button class="play-btn">Play</button>
+            <button class="reset-btn">Restart</button>
+            <button class="credit-btn">Credit</button>
+        </div>
+    </div>
+    <div class="cover-bg"></div>
+    <div class="game-over">
+        <p>Game Over</p>
+        <button class="restart-btn">Restart</button>
+    </div>
+    <div class="credit">
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div>
+                        <h4>Họ và tên</h4>
+                        <p>Trần Anh Trí</p>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div>
+                        <h4>Mã số sinh viên</h4>
+                        <p>21130577</p>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div>
+                        <h4>Ngày tháng năm sinh</h4>
+                        <p>12/11/2003</p>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div>
+                        <h4>Số điện thoại</h4>
+                        <p>0369744946</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
